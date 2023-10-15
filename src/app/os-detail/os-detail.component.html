@@ -1,0 +1,24 @@
+<div *ngIf="os" class="content-root">
+  <div class="header">
+    <h2>{{os.name}}</h2>
+    <h3>Производитель: {{os.vendor}}</h3>
+    <h3>Версия: {{os.version}}</h3>
+  </div>
+
+  <div *ngIf="galleryVisible" class="carousel">
+  </div>
+
+
+  <p>{{os.fullDescription}}</p>
+
+  <div *ngIf="os.terminalEnable || os.graphicsEnable" class="run-button">
+    <button *ngIf="os.terminalEnable" mat-raised-button color="primary">
+      <mat-icon>power_settings_new</mat-icon>
+      Запустить терминал
+    </button>
+    <button *ngIf="os.graphicsEnable" mat-raised-button color="primary">
+      <mat-icon>power_settings_new</mat-icon>
+      <p>Запустить графику</p>
+    </button>
+  </div>
+</div>
