@@ -14,7 +14,7 @@
   </div>
   <mat-card-content>
     <div *ngIf="os.photos" class="carousel">
-      <si-ng-carousel [visible]="1" [showButtons]="false" [loop]="true" #carousel>
+      <si-ng-carousel id="carousel" [visible]="1" [showButtons]="true" [loop]="true" #carousel>
         <div *ngFor="let img of os.photos" siCarouselItem class="item">
           <img
             alt="photo"
@@ -26,12 +26,7 @@
       <si-ng-carousel-navigation
         [carousel]="carousel"
         [previews]="previewPhotos"
-        style="
-          --current-color: #7b1fa2;
-          --border-width: 5px;
-          --item-spacing: .1rem;
-          justify-content: space-between;
-        "
+        id="carousel-controller"
       >
 
       </si-ng-carousel-navigation>

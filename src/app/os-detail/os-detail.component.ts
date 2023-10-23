@@ -1,15 +1,16 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Component, ViewEncapsulation} from '@angular/core';
 
-import { Subject, takeUntil } from 'rxjs';
+import {Subject, takeUntil} from 'rxjs';
 
-import { IOs } from '../../interfaces/IOs';
-import { OsService } from '../../service/os.service';
+import {IOs} from '../../interfaces/IOs';
+import {OsService} from '../../service/os.service';
 
 @Component({
   selector: 'app-os-detail',
   templateUrl: './os-detail.component.html',
-  styleUrls: ['./os-detail.component.css']
+  styleUrls: ['./os-detail.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class OsDetailComponent {
   public os!: IOs;

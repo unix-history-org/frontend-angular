@@ -1,12 +1,15 @@
-:host {
+app-os-detail {
   margin-top: 76px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   color: #fff;
 }
+p, h1, h2, h3 {
+  color: #fff;
+}
 
-.content-root {
+app-os-detail .content-root {
   margin: 20px;
   padding: 10px;
   border-radius: 15px;
@@ -14,7 +17,6 @@
   flex-direction: column;
   box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f;
 }
-
 
 .header {
   display: flex;
@@ -53,7 +55,7 @@ h2, h3 {
   flex-direction: column;
 }
 
-.os-card-img {
+app-os-detail .os-card-img {
   display: flex;
   border-radius: 100px !important;
   width: 150px;
@@ -74,7 +76,7 @@ h2, h3 {
   height: 200px;
 }
 
-.carousel a {
+ .carousel a {
   opacity: 1;
 }
 
@@ -84,6 +86,7 @@ h2, h3 {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
 .run-button button {
   display: flex;
   flex-wrap: wrap;
@@ -92,4 +95,30 @@ h2, h3 {
 }
 .run-button button * {
   display: flex;
+}
+
+:host a .chevron {
+  opacity: 1 !important;
+}
+
+#carousel .gallery > a {
+  background-color: #7b1fa2;
+  color: #fff;
+  opacity: 1;
+  text-align: center;
+}
+
+#carousel .gallery > a::before {
+  top: 0.5rem;
+}
+
+#carousel .gallery > a.right::before {
+  left: -0.15rem;
+}
+
+#carousel-controller {
+  --current-color: #7b1fa2;
+  --border-width: 5px;
+  --item-spacing: .1rem;
+  justify-content: space-between;
 }
