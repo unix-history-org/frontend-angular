@@ -13,7 +13,8 @@ import { OsService } from '../../service/os.service';
 })
 export class OsDetailComponent {
   public os!: IOs;
-  public galleryVisible: boolean = false;
+  public previewPhotos!: URL[];
+
   private _destroy$ = new Subject<void>();
 
   constructor(
@@ -23,7 +24,7 @@ export class OsDetailComponent {
   }
 
   public ngOnInit(): void {
-    this.getOsFromService();
+    this._getOsFromService();
   }
 
   public ngOnDestroy(): void {
@@ -31,14 +32,17 @@ export class OsDetailComponent {
     this._destroy$.complete();
   }
 
-  private getOsFromService(): void {
-    const id = this._activatedRoute.snapshot.paramMap.get('id')!;
+  private _getOsFromService(): void {
+    const id = this._activatedRoute.snapshot.params['id'];
     this._osService.getOs(id)
       .pipe(
         takeUntil(this._destroy$),
       )
       .subscribe(os => {
         this.os = os;
+        if(this.os.photos) {
+          this.previewPhotos = this.os.photos.map(photo => photo.url);
+        }
       });
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {catchError, Observable, of} from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 
 import { IOs } from '../interfaces/IOs';
 
@@ -17,7 +17,7 @@ export class OsService {
     private readonly _httpClient: HttpClient
   ) { }
 
-  getOss(): Observable<IOs[]> {
+  public getOss(): Observable<IOs[]> {
     return this._httpClient.get<IOs[]>(this._osUrl)
       .pipe(
         catchError(
@@ -26,7 +26,7 @@ export class OsService {
       );
   }
 
-  getOs(id: string): Observable<IOs> {
+  public getOs(id: string): Observable<IOs> {
     const url = `${this._osUrl}/${id}`;
 
     return this._httpClient.get<IOs>(url)

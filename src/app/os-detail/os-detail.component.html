@@ -1,24 +1,53 @@
-<div *ngIf="os" class="content-root">
+<mat-card *ngIf="os" class="content-root">
   <div class="header">
-    <h2>{{os.name}}</h2>
-    <h3>Производитель: {{os.vendor}}</h3>
-    <h3>Версия: {{os.version}}</h3>
+    <div class="os-text mat-mdc-card-header-text">
+      <h2>{{os.name}}</h2>
+      <h3>Производитель: {{os.vendor}}</h3>
+      <h3>Версия: {{os.version}}</h3>
+    </div>
+    <img
+      mat-card-sm-image
+      src="{{os.mainPhoto}}"
+      alt="фото ос"
+      class="os-card-img"
+    >
   </div>
+  <mat-card-content>
+    <div *ngIf="os.photos" class="carousel">
+      <si-ng-carousel [visible]="1" [showButtons]="false" [loop]="true" #carousel>
+        <div *ngFor="let img of os.photos" siCarouselItem class="item">
+          <img
+            alt="photo"
+            [src]="img.url"
+            class="carousel-img"
+          />
+        </div>
+      </si-ng-carousel>
+      <si-ng-carousel-navigation
+        [carousel]="carousel"
+        [previews]="previewPhotos"
+        style="
+          --current-color: #7b1fa2;
+          --border-width: 5px;
+          --item-spacing: .1rem;
+          justify-content: space-between;
+        "
+      >
 
-  <div *ngIf="galleryVisible" class="carousel">
-  </div>
+      </si-ng-carousel-navigation>
+    </div>
+    <p>{{os.fullDescription}}</p>
 
-
-  <p>{{os.fullDescription}}</p>
-
-  <div *ngIf="os.terminalEnable || os.graphicsEnable" class="run-button">
+  </mat-card-content>
+  <mat-divider *ngIf="os.terminalEnable || os.graphicsEnable"></mat-divider>
+  <mat-card-actions *ngIf="os.terminalEnable || os.graphicsEnable" class="run-button">
     <button *ngIf="os.terminalEnable" mat-raised-button color="primary">
       <mat-icon>power_settings_new</mat-icon>
-      Запустить терминал
+      <div>Запустить терминал</div>
     </button>
     <button *ngIf="os.graphicsEnable" mat-raised-button color="primary">
       <mat-icon>power_settings_new</mat-icon>
-      <p>Запустить графику</p>
+      <div>Запустить графику</div>
     </button>
-  </div>
-</div>
+  </mat-card-actions>
+</mat-card>

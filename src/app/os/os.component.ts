@@ -10,12 +10,13 @@ import { OsService } from '../../service/os.service';
   styleUrls: ['./os.component.css']
 })
 export class OsComponent {
+
   public oss!: IOs[];
 
-  private _destroy$ = new Subject<void>();
+  private readonly _destroy$ = new Subject<void>();
 
   constructor(
-    private readonly _OsService: OsService,
+    private readonly _osService: OsService,
   ) {}
 
   public ngOnInit(): void {
@@ -28,7 +29,7 @@ export class OsComponent {
   }
 
   private _getOssFromService(): void {
-    this._OsService.getOss()
+    this._osService.getOss()
       .pipe(
         takeUntil(this._destroy$)
       )
