@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Subject, takeUntil} from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { IOs } from '../../interfaces/IOs';
 import { OsService } from '../../service/os.service';
