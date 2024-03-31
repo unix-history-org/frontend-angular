@@ -1,4 +1,4 @@
-import {IPhoto} from './IPhoto';
+import { IPhoto } from './iphoto';
 
 export interface IOs {
   id: string;
@@ -15,4 +15,7 @@ export interface IOs {
   childId?: string[];
   isFree: boolean;
   canDownloadedRaw: boolean;
+  osUsername: string;
+  osPassword: string;
+  osRootPassword: string;
 }

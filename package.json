@@ -21,6 +21,7 @@
     "@angular/router": "^16.2.0",
     "@silmar/ng-carousel": "^6.1.1",
     "hammerjs": "^2.0.8",
+    "ng-terminal": "^6.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

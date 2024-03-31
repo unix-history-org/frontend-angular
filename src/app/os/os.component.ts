@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
-import { IOs } from '../../interfaces/IOs';
+import { IOs } from '../../interfaces/ios';
 import { OsService } from '../../service/os.service';
 
 @Component({

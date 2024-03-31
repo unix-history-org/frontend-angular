@@ -15,7 +15,8 @@ import { OsComponent } from './os/os.component';
 import { OsDetailComponent } from './os-detail/os-detail.component';
 import { OsTermComponent } from './os-term/os-term.component';
 import { AppRoutingModule } from './app-routing.module';
-import {NgCarouselModule} from '@silmar/ng-carousel';
+import { NgCarouselModule } from '@silmar/ng-carousel';
+import { NgTerminalModule } from 'ng-terminal';
 
 
 @NgModule({
@@ -26,19 +27,20 @@ import {NgCarouselModule} from '@silmar/ng-carousel';
     OsDetailComponent,
     OsTermComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        NgCarouselModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    NgCarouselModule,
+    NgTerminalModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

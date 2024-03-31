@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { catchError, Observable, of } from 'rxjs';
 
-import { IOs } from '../interfaces/IOs';
+import { IOs } from '../interfaces/ios';
 
 
 @Injectable({

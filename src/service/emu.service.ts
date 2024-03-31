@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { catchError, Observable, of } from 'rxjs';
+import { WebSocketSubject } from 'rxjs/internal/observable/dom/WebSocketSubject';
+import { webSocket } from 'rxjs/webSocket';
+
+import { IEmu } from '../interfaces/iemu';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmuService {
+  private readonly _emu = 'api/emu';
+  private _socket$?: WebSocketSubject<any>;
+  private readonly _emuWs = `ws://${window.location.host}/${this._emu}`;
+
+  constructor(
+    private readonly _httpClient: HttpClient,
+  ) {}
+
+  public getEmu(id: string): Observable<IEmu> {
+    return this._httpClient.get<IEmu>(`${this._emu}/start/${id}`)
+      .pipe(
+        catchError(
+          this.handleError<IEmu>(`getEmu id=${id}`)
+        )
+      );
+  }
+
+  public stopEmu(id: string): Observable<boolean> {
+    return this._httpClient.get<boolean>(`${this._emu}/stop/${id}`)
+      .pipe(
+        catchError(
+          this.handleError<boolean>(`getEmu id=${id}`)
+        )
+      );
+  }
+
+  public getEmulationWebSocket(osId: string, emuId: string): WebSocketSubject<any> {
+    this._socket$ = webSocket({
+      url: `${this._emuWs}/${osId}/${emuId}/cli`,
+      deserializer: (e) => e.data,
+      serializer: (value) => value,
+    });
+    return this._socket$;
+  }
+
+  public sendToEmu(data: string): void {
+    if(!this._socket$) return;
+    this._socket$.next(data);
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+
+}
