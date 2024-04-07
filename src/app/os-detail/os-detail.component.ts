@@ -15,6 +15,7 @@ import { IOs } from '../../interfaces/ios';
 import { IEmu } from '../../interfaces/iemu';
 import { EmuService } from '../../service/emu.service';
 import { OsService } from '../../service/os.service';
+import { NgNovncComponent } from '../ng-novnc/ng-novnc.component';
 
 @Component({
   selector: 'app-os-detail',
@@ -23,18 +24,24 @@ import { OsService } from '../../service/os.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
-  public os!: IOs;
+  public os?: IOs;
   public previewPhotos!: URL[];
   public terminalOpened: boolean = false;
+  public graphicOpened: boolean = false;
   public runTerminalText!: string;
+  public runGraphicText!: string;
+  public terminalDisabled: boolean = false;
+  public graphicDisabled: boolean = false;
 
   private _destroy$ = new Subject<void>();
   private _emu?: IEmu;
   private readonly _runTerminalClose: string = 'Закрыть терминал';
-
   private readonly _runTerminalOpen: string = 'Запустить терминал';
+  private readonly _runGraphicClose: string = 'Закрыть графику';
+  private readonly _runGraphicOpen: string = 'Запустить графику'
   private _isFirstTermInit: boolean = true;
-  @ViewChild('term', {static: false}) child!: NgTerminal;
+  @ViewChild('xterm', {static: false}) xterm!: NgTerminal;
+  @ViewChild('novnc') novnc!: NgNovncComponent;
 
   constructor(
     private readonly _activatedRoute: ActivatedRoute,
@@ -42,25 +49,38 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
     private readonly _emuService: EmuService
   ) {
     this.runTerminalText = this._runTerminalOpen;
+    this.runGraphicText = this._runGraphicOpen;
   }
 
   public openCloseTerminal() {
     if(this.terminalOpened) {
       this._onCloseTerminal();
+      this.graphicDisabled = false;
     }
     else {
       this._onOpenTerminal();
+      this.graphicDisabled = true;
+    }
+  }
+
+  public openCloseGraphic() {
+    if(this.graphicOpened) {
+      this._onCloseGraphic();
+      this.terminalDisabled = false;
+    }
+    else {
+      this._onOpenGraphic();
+      this.terminalDisabled = true;
     }
   }
 
   public ngAfterViewChecked() {
-    if(this.terminalOpened && this.child && this._isFirstTermInit) {
-      this.child.onData()
+    if(this.terminalOpened && this.xterm && this._isFirstTermInit) {
+      this.xterm.onData()
         .pipe(
           takeUntil(this._destroy$),
         )
         .subscribe((input) => {
-          // this.child.write(input);
           if(this._emu) this._emuService.sendToEmu(input);
       });
       this._isFirstTermInit = false;
@@ -91,6 +111,21 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
     this._stopEmu();
   }
 
+  private _onOpenGraphic() {
+    this.runGraphicText = this._runGraphicClose;
+    this.graphicOpened = true;
+
+    this._getEmuFromService();
+  }
+
+  private _onCloseGraphic() {
+    this.runGraphicText = this._runGraphicClose;
+    this.graphicOpened = false;
+
+    this.novnc.closeVNC();
+    this._stopEmu();
+  }
+
   private _subscribeToSocket() {
     if(!this._emu) return;
 
@@ -103,7 +138,9 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
       )
       .subscribe(
       (message: string) => {
-        this.child.write(message);
+        if (message.slice(0, 2) === '0:' ){
+          this.xterm.write(message.slice(2));
+        }
       }
     );
   }
@@ -116,7 +153,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
       )
       .subscribe(os => {
         this.os = os;
-        if(this.os.photos) {
+        if(this.os && this.os.photos) {
           this.previewPhotos = this.os.photos.map(photo => photo.url);
         }
       });
@@ -130,7 +167,14 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
       )
       .subscribe(emu => {
         this._emu = emu;
-        this._subscribeToSocket();
+        if(this.terminalOpened) {
+          this._subscribeToSocket();
+        }
+        if(this.graphicOpened) {
+          if(this._emu.graphical) {
+            this.novnc.initVNC(this._emu.graphical);
+          }
+        }
       });
   }
 

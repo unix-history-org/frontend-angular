@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OsTermComponent } from './os-term.component';
+import { NgNovncComponent } from './ng-novnc.component';
 
-describe('OsTermComponent', () => {
-  let component: OsTermComponent;
-  let fixture: ComponentFixture<OsTermComponent>;
+describe('NgNovncComponent', () => {
+  let component: NgNovncComponent;
+  let fixture: ComponentFixture<NgNovncComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OsTermComponent]
+      declarations: [NgNovncComponent]
     });
-    fixture = TestBed.createComponent(OsTermComponent);
+    fixture = TestBed.createComponent(NgNovncComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

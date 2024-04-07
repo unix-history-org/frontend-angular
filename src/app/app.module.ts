@@ -13,10 +13,10 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { OsComponent } from './os/os.component';
 import { OsDetailComponent } from './os-detail/os-detail.component';
-import { OsTermComponent } from './os-term/os-term.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgCarouselModule } from '@silmar/ng-carousel';
 import { NgTerminalModule } from 'ng-terminal';
+import { NgNovncComponent } from './ng-novnc/ng-novnc.component';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgTerminalModule } from 'ng-terminal';
     AdminComponent,
     OsComponent,
     OsDetailComponent,
-    OsTermComponent
+    NgNovncComponent
   ],
   imports: [
     BrowserModule,

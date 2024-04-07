@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { catchError, Observable, of } from 'rxjs';
@@ -11,14 +11,24 @@ import { IEmu } from '../interfaces/iemu';
 @Injectable({
   providedIn: 'root'
 })
-export class EmuService {
+export class EmuService implements OnDestroy {
   private readonly _emu = 'api/emu';
   private _socket$?: WebSocketSubject<any>;
   private readonly _emuWs = `ws://${window.location.host}/${this._emu}`;
+  private _timer: ReturnType<typeof setInterval>;
 
   constructor(
     private readonly _httpClient: HttpClient,
-  ) {}
+  ) {
+    this._timer = setInterval(() => {
+      this._pingEmu();
+    }, 1000);
+  }
+
+  public ngOnDestroy(): void {
+    clearInterval(this._timer);
+  }
+
 
   public getEmu(id: string): Observable<IEmu> {
     return this._httpClient.get<IEmu>(`${this._emu}/start/${id}`)
@@ -49,7 +59,12 @@ export class EmuService {
 
   public sendToEmu(data: string): void {
     if(!this._socket$) return;
-    this._socket$.next(data);
+    this._socket$.next(`0:${data}`);
+  }
+
+  private _pingEmu(): void {
+    if(!this._socket$) return;
+    this._socket$.next(`1:ping`);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

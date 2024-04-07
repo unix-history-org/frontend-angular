@@ -36,13 +36,23 @@
   </mat-card-content>
   <mat-divider *ngIf="os.terminalEnable || os.graphicsEnable"></mat-divider>
   <mat-card-actions *ngIf="os.terminalEnable || os.graphicsEnable" class="run-button">
-    <button *ngIf="os.terminalEnable" mat-raised-button color="primary" (click)="openCloseTerminal()">
+    <button
+      *ngIf="os.terminalEnable"
+      mat-raised-button color="primary"
+      (click)="openCloseTerminal()"
+      [disabled]="terminalDisabled"
+    >
       <mat-icon>power_settings_new</mat-icon>
       <div>{{runTerminalText}}</div>
     </button>
-    <button *ngIf="os.graphicsEnable" mat-raised-button color="primary">
+    <button
+      *ngIf="os.graphicsEnable"
+      mat-raised-button color="primary"
+      (click)="openCloseGraphic()"
+      [disabled]="graphicDisabled"
+    >
       <mat-icon>power_settings_new</mat-icon>
-      <div>Запустить графику</div>
+      <div>{{runGraphicText}}</div>
     </button>
   </mat-card-actions>
   <div
@@ -56,9 +66,23 @@
       </mat-card-content>
     </mat-card>
     <ng-terminal
-      #term
+      #xterm
       [rows]="80"
-      [cols]="25"
+      [cols]="24"
     ></ng-terminal>
+  </div>
+  <div
+    *ngIf="graphicOpened"
+  >
+    <mat-card class="os-authorize">
+      <mat-card-content>
+        Пользователь: {{os.osUsername}}<br>
+        Пароль: {{os.osPassword}}<br>
+        Пароль root: {{os.osRootPassword}}<br>
+      </mat-card-content>
+    </mat-card>
+    <app-ng-novnc
+      #novnc
+    ></app-ng-novnc>
   </div>
 </mat-card>
