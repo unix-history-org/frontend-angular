@@ -38,7 +38,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
   private readonly _runTerminalClose: string = 'Закрыть терминал';
   private readonly _runTerminalOpen: string = 'Запустить терминал';
   private readonly _runGraphicClose: string = 'Закрыть графику';
-  private readonly _runGraphicOpen: string = 'Запустить графику'
+  private readonly _runGraphicOpen: string = 'Запустить графику';
   private _isFirstTermInit: boolean = true;
   @ViewChild('xterm', {static: false}) xterm!: NgTerminal;
   @ViewChild('novnc') novnc!: NgNovncComponent;
@@ -81,7 +81,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
           takeUntil(this._destroy$),
         )
         .subscribe((input) => {
-          if(this._emu) this._emuService.sendToEmu(input);
+          if(this._emu && this.terminalOpened) this._emuService.sendToEmu(input);
       });
       this._isFirstTermInit = false;
     }
@@ -138,7 +138,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
       )
       .subscribe(
       (message: string) => {
-        if (message.slice(0, 2) === '0:' ){
+        if (message.slice(0, 2) === '0:' && this.terminalOpened){
           this.xterm.write(message.slice(2));
         }
       }
@@ -170,10 +170,8 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
         if(this.terminalOpened) {
           this._subscribeToSocket();
         }
-        if(this.graphicOpened) {
-          if(this._emu.graphical) {
+        if(this.graphicOpened && this._emu.graphical) {
             this.novnc.initVNC(this._emu.graphical);
-          }
         }
       });
   }
