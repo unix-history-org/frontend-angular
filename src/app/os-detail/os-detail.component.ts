@@ -107,6 +107,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
   private _onCloseTerminal() {
     this.runTerminalText = this._runTerminalOpen;
     this.terminalOpened = false;
+    this._isFirstTermInit = true;
 
     this._stopEmu();
   }
