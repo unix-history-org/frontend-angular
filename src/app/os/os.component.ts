@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { IOs } from '../../interfaces/ios';
@@ -9,7 +9,7 @@ import { OsService } from '../../service/os.service';
   templateUrl: './os.component.html',
   styleUrls: ['./os.component.css']
 })
-export class OsComponent {
+export class OsComponent implements OnDestroy, OnInit {
 
   public oss!: IOs[];
 

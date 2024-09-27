@@ -42,6 +42,6 @@ import { NgNovncComponent } from './ng-novnc/ng-novnc.component';
     NgTerminalModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import { IPhoto } from './iphoto';
 export interface IOs {
   id: string;
   name: string;
-  version: string
+  version: string;
   vendor: string;
   shortDescription: string;
   fullDescription: string;
