@@ -14,8 +14,9 @@ import { IEmu } from '../interfaces/iemu';
 export class EmuService implements OnDestroy {
   private readonly _emu = 'api/emu';
   private _socket$?: WebSocketSubject<any>;
-  private readonly _emuWs = `ws://${window.location.host}/${this._emu}`;
-  private _timer: ReturnType<typeof setInterval>;
+  private readonly _wsProtocol = (window.location.protocol === 'https:') ? 'wss' : 'ws:';
+  private readonly _emuWs = `${this._wsProtocol}://${window.location.host}/${this._emu}`;
+  private readonly _timer: ReturnType<typeof setInterval>;
 
   constructor(
     private readonly _httpClient: HttpClient,
