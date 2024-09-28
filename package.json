@@ -1,5 +1,5 @@
 {
-  "name": "frontend-angular",
+  "name": "unix-history-frontend-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
