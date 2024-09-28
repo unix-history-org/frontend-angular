@@ -18,7 +18,7 @@ export class OsService {
   ) { }
 
   public getOss(): Observable<IOs[]> {
-    return this._httpClient.get<IOs[]>(this._osUrl)
+    return this._httpClient.get<IOs[]>(`${this._osUrl}/`)
       .pipe(
         catchError(
           this.handleError<IOs[]>('getOss', [])
