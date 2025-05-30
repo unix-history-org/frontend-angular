@@ -12,7 +12,6 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { OsComponent } from './os/os.component';
-import { OsDetailComponent } from './os-detail/os-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgCarouselModule } from '@silmar/ng-carousel';
 import { NgTerminalModule } from 'ng-terminal';
@@ -24,23 +23,21 @@ import { NgNovncComponent } from './ng-novnc/ng-novnc.component';
     AppComponent,
     AdminComponent,
     OsComponent,
-    OsDetailComponent,
-    NgNovncComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    NgCarouselModule,
-    NgTerminalModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        NgCarouselModule,
+        NgTerminalModule
+    ],
   providers: [],
   bootstrap: [ AppComponent ]
 })

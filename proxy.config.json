@@ -1,7 +1,7 @@
 {
   "/api/": {
     "target": "https://dev.unix-history.org",
-    "secure": false,
+    "secure": true,
     "changeOrigin": true,
     "logLevel": "debug",
     "ws": true

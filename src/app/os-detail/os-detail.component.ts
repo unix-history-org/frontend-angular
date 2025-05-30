@@ -7,14 +7,21 @@ import {
   ViewEncapsulation,
   OnDestroy,
 } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { MatCard, MatCardActions, MatCardContent, MatCardSmImage } from '@angular/material/card';
+import { NgCarouselModule } from '@silmar/ng-carousel';
+import { MatDivider } from '@angular/material/divider';
+import { MatButton } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Subject, takeUntil } from 'rxjs';
-import { NgTerminal } from 'ng-terminal';
+import { NgTerminal, NgTerminalModule } from 'ng-terminal';
 
 import { IOs } from '../../interfaces/ios';
 import { IEmu } from '../../interfaces/iemu';
 import { EmuService } from '../../service/emu.service';
 import { OsService } from '../../service/os.service';
+
 import { NgNovncComponent } from '../ng-novnc/ng-novnc.component';
 
 @Component({
@@ -22,9 +29,24 @@ import { NgNovncComponent } from '../ng-novnc/ng-novnc.component';
   templateUrl: './os-detail.component.html',
   styleUrls: ['./os-detail.component.css'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardContent,
+    NgCarouselModule,
+    MatDivider,
+    MatCardActions,
+    NgTerminalModule,
+    MatCardSmImage,
+    NgNovncComponent,
+    MatButton,
+    MatIconModule,
+    NgIf,
+    NgFor,
+  ]
 })
 export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
-  public os?: IOs;
+  public os!: IOs;
   public previewPhotos!: URL[];
   public terminalOpened: boolean = false;
   public graphicOpened: boolean = false;

@@ -1,0 +1,45 @@
+app-license {
+  margin-top: 76px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #fff;
+  width: 100%;
+}
+
+app-license .content-root {
+  margin: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f;
+  width: 100%;
+}
+
+mat-card-content {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+h2, h3 {
+  margin: 10px 0;
+  display: flex;
+}
+
+
+.license-text {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+h3 a {
+  color: #fff;
+  text-decoration: underline;
+}
