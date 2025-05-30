@@ -57,6 +57,8 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private _destroy$ = new Subject<void>();
   private _emu?: IEmu;
+  private readonly _wsProtocol = (window.location.protocol === 'https:') ? 'wss' : 'ws';
+  private readonly _emuWsBaseUrl = `${this._wsProtocol}://${window.location.host}`;
   private readonly _runTerminalClose: string = 'Закрыть терминал';
   private readonly _runTerminalOpen: string = 'Запустить терминал';
   private readonly _runGraphicClose: string = 'Закрыть графику';
@@ -151,10 +153,10 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private _subscribeToSocket() {
     if(!this._emu) return;
+    if(!this._emu.terminal) return;
 
     this._emuService.getEmulationWebSocket(
-      this._activatedRoute.snapshot.params['id'],
-      this._emu.emulationId
+      this._emu.terminal.toString()
     )
       .pipe(
         takeUntil(this._destroy$),
@@ -194,7 +196,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
           this._subscribeToSocket();
         }
         if(this.graphicOpened && this._emu.graphical) {
-            this.novnc.initVNC(this._emu.graphical);
+          this.novnc.initVNC(`${this._emuWsBaseUrl}/${this._emu.graphical}`);
         }
       });
   }

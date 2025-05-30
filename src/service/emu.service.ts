@@ -14,8 +14,8 @@ import { IEmu } from '../interfaces/iemu';
 export class EmuService implements OnDestroy {
   private readonly _emu = 'api/emu';
   private _socket$?: WebSocketSubject<any>;
-  private readonly _wsProtocol = (window.location.protocol === 'https:') ? 'wss' : 'ws:';
-  private readonly _emuWs = `${this._wsProtocol}://${window.location.host}/${this._emu}`;
+  private readonly _wsProtocol = (window.location.protocol === 'https:') ? 'wss' : 'ws';
+  private readonly _emuWsBaseUrl = `${this._wsProtocol}://${window.location.host}`;
   private readonly _timer: ReturnType<typeof setInterval>;
 
   constructor(
@@ -49,9 +49,9 @@ export class EmuService implements OnDestroy {
       );
   }
 
-  public getEmulationWebSocket(osId: string, emuId: string): WebSocketSubject<any> {
+  public getEmulationWebSocket(url: string): WebSocketSubject<any> {
     this._socket$ = webSocket({
-      url: `${this._emuWs}/${osId}/${emuId}/cli`,
+      url: `${this._emuWsBaseUrl}/${url}`,
       deserializer: (e) => e.data,
       serializer: (value) => value,
     });
