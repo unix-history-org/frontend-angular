@@ -120,7 +120,7 @@ export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private _onCloseGraphic() {
-    this.runGraphicText = this._runGraphicClose;
+    this.runGraphicText = this._runGraphicOpen;
     this.graphicOpened = false;
 
     this.novnc.closeVNC();
