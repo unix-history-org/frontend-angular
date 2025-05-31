@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
 html, body { height: 100%; }
 body {
@@ -10,4 +11,11 @@ body {
 .app-root {
   display: flex;
   flex-flow: column;
+}
+
+#header-nav {
+  @include mat.tabs-overrides((
+    active-focus-indicator-color: #fff,
+    active-focus-label-text-color: #fff,
+  ));
 }

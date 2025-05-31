@@ -4,13 +4,13 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 @Component({
   selector: 'app-license',
   templateUrl: './license.component.html',
-  styleUrl: './license.component.css',
+  styleUrl: './license.component.scss',
   encapsulation: ViewEncapsulation.None,
   imports: [
     MatCardContent,
     MatCard
   ],
-  standalone: true
+  standalone: true,
 })
 export class LicenseComponent {
 

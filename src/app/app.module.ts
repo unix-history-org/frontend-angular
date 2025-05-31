@@ -16,28 +16,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgCarouselModule } from '@silmar/ng-carousel';
 import { NgTerminalModule } from 'ng-terminal';
 import { NgNovncComponent } from './ng-novnc/ng-novnc.component';
+import { MatTabLink, MatTabNav } from '@angular/material/tabs';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
-    OsComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        NgCarouselModule,
-        NgTerminalModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    NgCarouselModule,
+    NgTerminalModule,
+    MatTabNav,
+    MatTabLink
+  ],
   providers: [],
   bootstrap: [ AppComponent ]
 })

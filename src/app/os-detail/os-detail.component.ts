@@ -27,23 +27,23 @@ import { NgNovncComponent } from '../ng-novnc/ng-novnc.component';
 @Component({
   selector: 'app-os-detail',
   templateUrl: './os-detail.component.html',
-  styleUrls: ['./os-detail.component.css'],
+  styleUrls: ['./os-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    MatCard,
-    MatCardContent,
-    NgCarouselModule,
-    MatDivider,
-    MatCardActions,
-    NgTerminalModule,
-    MatCardSmImage,
-    NgNovncComponent,
-    MatButton,
-    MatIconModule,
     NgIf,
     NgFor,
-  ]
+    MatCard,
+    MatCardContent,
+    MatDivider,
+    MatCardActions,
+    MatCardSmImage,
+    MatButton,
+    MatIconModule,
+    NgCarouselModule,
+    NgTerminalModule,
+    NgNovncComponent,
+  ],
 })
 export class OsDetailComponent implements OnInit, OnDestroy, AfterViewChecked {
   public os!: IOs;

@@ -7,9 +7,9 @@ import RFB from "@novnc/novnc/core/rfb";
   selector: 'app-ng-novnc',
   templateUrl: './ng-novnc.component.html',
   styleUrls: [
-    './ng-novnc.component.css',
+    './ng-novnc.component.scss',
   ],
-  standalone: true
+  standalone: true,
 })
 export class NgNovncComponent implements OnInit, OnDestroy{
   @ViewChild('vncContainer', { static: true }) vncContainer!: ElementRef;

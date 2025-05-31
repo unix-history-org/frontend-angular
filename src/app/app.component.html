@@ -1,11 +1,26 @@
 <header>
   <mat-toolbar color="primary">
-    <nav>
-      <span><a mat-tab-link routerLink="/os">OS</a></span>
-      <span><a mat-tab-link routerLink="/license">LICENSE</a></span>
+    <nav mat-tab-nav-bar id="header-nav">
+      <a
+        mat-tab-link
+        routerLink="/os"
+        routerLinkActive #rlaOs="routerLinkActive"
+        [active]="rlaOs.isActive"
+      >
+        OS
+      </a>
+      <a
+        mat-tab-link
+        routerLink="/license"
+        routerLinkActive #rlaLicense="routerLinkActive"
+        [active]="rlaLicense.isActive"
+      >
+        LICENSE
+      </a>
     </nav>
   </mat-toolbar>
 
 </header>
-
+<main>
 <router-outlet></router-outlet>
+</main>
