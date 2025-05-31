@@ -17,5 +17,15 @@ body {
   @include mat.tabs-overrides((
     active-focus-indicator-color: #fff,
     active-focus-label-text-color: #fff,
+    active-hover-indicator-color: #fff,
+    active-hover-label-text-color: #fff,
+    active-indicator-color: #fff,
+    active-label-text-color: #fff,
+    active-ripple-color: #fff,
+
+    inactive-focus-label-text-color: #bbb,
+    inactive-label-text-color: #bbb,
+    inactive-ripple-color: #fff,
+
   ));
 }
